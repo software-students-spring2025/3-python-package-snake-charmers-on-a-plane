@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "snakecharmerpackage"
-description = "A tiny package for any user's entertainment"
+description = "A tiny, non-serious package"
 version = "0.1.1"
 authors = [
   { name="Ray Ochotta", email="amo9758@nyu.edu" },

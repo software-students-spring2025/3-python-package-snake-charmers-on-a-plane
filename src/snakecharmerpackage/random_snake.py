@@ -76,15 +76,17 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         all_directions = ["up", "down", "left", "right"]
         opposites = ({"up", "down"}, {"left", "right"})
 
+        # make next direction != current direction
+        all_directions.remove(self.direction)
         random_direction = random.choice(all_directions)
-        print(self.direction)
+        all_directions.append(self.direction)
 
         if ( 
             random_direction in all_directions 
             and {random_direction, self.direction} not in opposites # make sure snake doesn't collide with itself
         ):
             self.direction = random_direction
-            print("in direction")
+            print(self.direction)
     
 
     def perform_actions(self):

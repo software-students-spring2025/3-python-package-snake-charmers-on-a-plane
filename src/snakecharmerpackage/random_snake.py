@@ -22,10 +22,9 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         # initialize
         initial_x, initial_y = random.randint(100, 400), random.randint(100, 400) # spawn within center area
         self.snake_positions = [(initial_x, initial_y), (initial_x - 20, initial_y), (initial_x - 40, initial_y)] # positions of three segments
-        
         self.load_asset()
         self.create_snake()
-
+        
         # set up game loop
         self.direction = "right"
         self.bind_all("<Key>", self.move_random) # listens for any key press
@@ -86,9 +85,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             and {random_direction, self.direction} not in opposites # make sure snake doesn't collide with itself
         ):
             self.direction = random_direction
-            print(self.direction)
     
-
     def perform_actions(self):
         ''' Performs game loop's actions. '''
         if self.check_collisions(): 

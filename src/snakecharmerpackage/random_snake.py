@@ -38,7 +38,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         Loads snake segment asset.
         '''
-        self.snake_img = Image.open("./src/snakecharmerpackage/snake.png")
+        self.snake_img = Image.open("snake.png")
         self.snake_body = ImageTk.PhotoImage(self.snake_img)
 
     def create_snake(self):
@@ -47,6 +47,12 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         for x, y in self.snake_positions:
             self.create_image(x, y, image=self.snake_body, tag="snake") # tag works similarly to class in css
+
+    def draw(self):
+        self.delete("snake")
+        for x, y in self.snake_positions:
+            self.create_rectangle(x, y, x + 10, y + 10, fill="yellow", tag="snake")
+
 
     def move_snake(self):
         '''
@@ -66,9 +72,12 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         # replace head with body
         self.snake_positions = [new_head_pos] + self.snake_positions[:-1]
 
-        snake_segments = self.find_withtag("snake") # list
+        # I don't think this loop is necessary anymore
+        '''snake_segments = self.find_withtag("snake") # list
         for segment, pos in zip(snake_segments, self.snake_positions):
-            self.coords(segment, pos) # update positions
+            self.coords(segment, pos) # update positions'''
+
+        self.draw()
 
     def move_random(self, event):
         ''' Randomizes the snake's movement. '''

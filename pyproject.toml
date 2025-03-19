@@ -9,7 +9,7 @@ version = "0.1.1"
 authors = [
   { name="Ray Ochotta", email="amo9758@nyu.edu" },
   { name="Eli Sun", email="ys3967@nyu.edu" },
-  { name="Kurt Luko", email="kl3641@nyu.edu" },
+  { name="Kurt Lukowitsch", email="kl3641@nyu.edu" },
   { name="Samantha Lin", email="sal9791@nyu.edu" },
 ]
 license = { file = "LICENSE" }

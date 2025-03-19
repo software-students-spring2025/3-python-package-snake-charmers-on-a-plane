@@ -2,6 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from tkinter import ttk
 import random
+from settings import Settings
 
 move_size = 10 # pixels
 
@@ -12,12 +13,16 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     direction that your snake heads in.
     '''
 
-    def __init__(self): 
+    def __init__(self, master):
         # set up Canvas (container for all objects)
         super().__init__(
-            width=500, height=500, background="darkgreen", highlightthickness=0
+            master, width=500, height=500, background="darkgreen", highlightthickness=0
         )
         mainframe = ttk.Frame(self, padding="3 3 12 12")
+
+        self.master = master
+        self.master.settings = {"speed": 50}
+        self.wait_for_settings()
 
         # initialize
         initial_x, initial_y = random.randint(100, 400), random.randint(100, 400) # spawn within center area
@@ -94,13 +99,22 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             and {random_direction, self.direction} not in opposites # make sure snake doesn't collide with itself
         ):
             self.direction = random_direction
+
+    def wait_for_settings(self):
+        settings_window = Settings(self.master)
+        self.master.wait_window(settings_window)
+        self.speed(self.master.settings["speed"])
+        self.start_game()
+
+    def speed(self, val):
+        self.game_speed = int((1000 / val) * 10)
     
     def perform_actions(self):
         ''' Performs game loop's actions. '''
         if self.check_collisions(): 
             self.end_game()
         self.move_snake()
-        self.after(100, self.perform_actions) # move snake every 100 ms
+        self.after(self.game_speed, self.perform_actions) # move snake every 100 ms
 
     def check_collisions(self):
         ''' Returns a bool that checks for collisions. '''
@@ -108,18 +122,27 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         # borders of play and self-collision
         return (head_x not in range(20, 480) or head_y not in range(20,480) or (head_x, head_y) in self.snake_positions[1:])
+
+    def start_game(self):
+        self.snake_positions = [(250, 250), (230, 250), (210, 250)]
+        self.load_asset()
+        self.create_snake()
+        self.direction = "right"
+        self.bind_all("<Key>", self.move_random)
+        self.pack()
+        self.after(self.game_speed, self.perform_actions)
     
     def end_game(self):
         ''' Defines the end of the game. '''
         self.delete(tk.ALL)
         self.create_text(250, 250, text="Game over!\nMay the RNG gods bestow\nfavor upon you next time.", fill="white", font=("", 20))
 
-
-# create game window
+#This is now done in main
+'''# create game window
 root = tk.Tk()
 root.title("random snake!")
 root.tk.call("tk", "scaling", 4.0)
 
 # start game
 snake = RandomSnake()
-root.mainloop()
+root.mainloop()'''

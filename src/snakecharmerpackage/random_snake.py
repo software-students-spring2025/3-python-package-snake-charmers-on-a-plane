@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageColor
 from tkinter import ttk
 import random
 from settings import Settings
@@ -43,6 +43,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         Loads snake segment asset.
         '''
+        # color change is implemented here
         self.snake_img = Image.open("snake.png")
         self.snake_body = ImageTk.PhotoImage(self.snake_img)
 
@@ -108,6 +109,10 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
     def speed(self, val):
         self.game_speed = int((1000 / val) * 10)
+
+    #color change section
+    def color(self, val):
+        self.color = ImageColor.getrgb("black")
     
     def perform_actions(self):
         ''' Performs game loop's actions. '''

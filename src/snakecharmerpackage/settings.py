@@ -14,9 +14,17 @@ class Settings(tk.Toplevel):
         ttk.Label(self, text="Enter speed (1-100):").pack(pady=5)
         self.speed_entry = ttk.Entry(self, textvariable=self.settings["speed"])
         self.speed_entry.pack()
+
+        #Color
+        ttk.Label(self, text="Enter a color. Incorrect colors will be randomized!").pack(pady=10)
+        self.color_entry = ttk.Entry(self)
+        self.color_entry.pack()
+
         # button
         self.start_button = tk.Button(self, text="Start", command=self.apply_settings, bg="lightgray", fg="black")
-        self.start_button.pack(pady=10)
+        self.start_button.pack(pady=15)
+
+        
 
     def apply_settings(self):
         ''''self.master.settings = {

@@ -110,8 +110,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         except: #else, randomize!
             #sorry for how gross and long this is, but needs must
             self.color = "#" + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255))
-            print("err: ")
-            print(self.color)
         
         self.start_game()
 

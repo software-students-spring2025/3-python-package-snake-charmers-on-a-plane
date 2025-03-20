@@ -1,12 +1,11 @@
 import tkinter as tk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageColor
 from tkinter import ttk
 import random
-from settings import Settings
+from src.snakecharmerpackage.settings import Settings
 
 move_size = 10 # pixels
 
-# includes window, since I need window to see snake movement
 class RandomSnake(tk.Canvas): # self is Canvas object
     '''
     A small snake game, where any key press randomizes the 
@@ -22,6 +21,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         self.master = master
         self.master.settings = {"speed": 50}
+        self.master.color_settings = {"color": "yellow"}
         self.wait_for_settings()
 
         # initialize
@@ -79,7 +79,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
                 self.score += 10
                 return True
         return False
-                
 
         
     def move_snake(self):
@@ -99,7 +98,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         
 
-
         if self.check_apple():
             self.snake_positions.insert(0,new_head_pos)
         else:
@@ -113,7 +111,9 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.draw()
 
     def move_random(self, event):
-        ''' Randomizes the snake's movement. '''
+        ''' 
+        Randomizes the snake's movement. 
+        '''
         all_directions = ["up", "down", "left", "right"]
         opposites = ({"up", "down"}, {"left", "right"})
 
@@ -132,21 +132,38 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         settings_window = Settings(self.master)
         self.master.wait_window(settings_window)
         self.speed(self.master.settings["speed"])
+        try: #if input is a valid color, then all clear!
+            ImageColor.getrgb(self.master.color_settings["color"])#check if valid
+            self.color = self.master.color_settings["color"]#set!
+        except: #else, randomize!
+            #sorry for how gross and long this is, but needs must
+            self.color = "#" + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255))
+        
         self.start_game()
 
     def speed(self, val):
         self.game_speed = int((1000 / val) * 10)
+
+    #color change section
+    def color(self, val):
+        self.color = "yellow"
     
     def perform_actions(self):
-        ''' Performs game loop's actions. '''
+        ''' 
+        Performs game loop's actions. 
+        '''
         if self.check_collisions(): 
             self.end_game()
+            return
         self.move_snake()
-        
-        self.after(self.game_speed, self.perform_actions) # move snake every 100 ms
+
+        self.after(self.game_speed, self.perform_actions) # move snake according to speed setting
+
 
     def check_collisions(self):
-        ''' Returns a bool that checks for collisions. '''
+        ''' 
+        Returns a bool that checks for collisions. 
+        '''
         head_x, head_y = self.snake_positions[0]
 
         # borders of play and self-collision
@@ -166,11 +183,8 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         start_button.pack(pady=10)
 
     def start_game(self):
-        
-        
-        self.snake_positions = [(250, 250), (230, 250), (210, 250)]
-        self.load_asset()
-        self.create_snake()
+
+        self.snake_positions = [(250, 250), (240, 250), (230, 250)]
         self.direction = "right"
         self.bind_all("<Key>", self.move_random)
         self.apples = []
@@ -179,20 +193,10 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.after(self.game_speed, self.perform_actions)
     
     def end_game(self):
-        ''' Defines the end of the game. '''
+        ''' 
+        Defines the end of the game. 
+        '''
+        self.delete(self.find_withtag("snake")) # not working, snake is still there at end of game
         self.delete(tk.ALL)
         self.create_text(250, 250, text="Game over!\nMay the RNG gods bestow\nfavor upon you next time.", fill="white", font=("", 20))
 
-
-
-
-
-#This is now done in main
-'''# create game window
-root = tk.Tk()
-root.title("random snake!")
-root.tk.call("tk", "scaling", 4.0)
-
-# start game
-snake = RandomSnake()
-root.mainloop()'''

@@ -1,8 +1,8 @@
 import tkinter as tk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageColor
 from tkinter import ttk
 import random
-from .settings import Settings
+from src.snakecharmerpackage.settings import Settings
 
 move_size = 10 # pixels
 
@@ -21,12 +21,13 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         self.master = master
         self.master.settings = {"speed": 50}
+        self.master.color_settings = {"color": "yellow"}
         self.wait_for_settings()
 
     def draw(self):
         self.delete("snake")
         for x, y in self.snake_positions:
-            self.create_rectangle(x, y, x + 10, y + 10, fill="yellow", tag="snake")
+            self.create_rectangle(x, y, x + 10, y + 10, fill=self.color, tag="snake")
 
     def move_snake(self):
         '''
@@ -70,10 +71,21 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         settings_window = Settings(self.master)
         self.master.wait_window(settings_window)
         self.speed(self.master.settings["speed"])
+        try: #if input is a valid color, then all clear!
+            ImageColor.getrgb(self.master.color_settings["color"])#check if valid
+            self.color = self.master.color_settings["color"]#set!
+        except: #else, randomize!
+            #sorry for how gross and long this is, but needs must
+            self.color = "#" + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255))
+        
         self.start_game()
 
     def speed(self, val):
         self.game_speed = int((1000 / val) * 10)
+
+    #color change section
+    def color(self, val):
+        self.color = "yellow"
     
     def perform_actions(self):
         ''' 

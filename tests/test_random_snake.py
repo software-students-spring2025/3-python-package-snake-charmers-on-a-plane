@@ -2,7 +2,6 @@ import pytest
 import tkinter as tk
 from src.snakecharmerpackage import random_snake
 from src.snakecharmerpackage import settings
-import time
 
 snake = random_snake.RandomSnake(tk.Tk())
 

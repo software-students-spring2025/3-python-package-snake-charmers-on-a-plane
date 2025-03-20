@@ -77,4 +77,18 @@ class Test:
         snake.direction = "down"
         snake.move_snake()
         assert snake.snake_positions[0] == (initial[0], initial[1] + move_size)
+
+    def test_game_over(self):
+        '''
+        Verifies game over screen is displayed after a wall is touched
+        '''
+        snake.snake_positions = [(10, 10)]
+        snake.perform_actions()
+        assert snake.check_collisions(), "Collision was not detected properly!"
+        snake.end_game()
+        text_items = snake.find_withtag("game_over")
+        assert text_items, "Game over screen did not appear properly!"
+
+
+
         

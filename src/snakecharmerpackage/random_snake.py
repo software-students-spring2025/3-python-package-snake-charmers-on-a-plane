@@ -124,6 +124,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         ''' Performs game loop's actions. '''
         if self.check_collisions(): 
             self.end_game()
+            return
         self.move_snake()
         self.after(self.game_speed, self.perform_actions) # move snake every 100 ms
 

@@ -3,7 +3,7 @@ from PIL import ImageColor, ImageTk, Image
 from tkinter import ttk
 import random
 # nvm did not figure out how to get both main and tests to work (requires no ., tests requires .)
-from settings import Settings
+from src.snakecharmerpackage.settings import Settings
 
 move_size = 10 # pixels
 
@@ -30,8 +30,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.snake_positions = [(initial_x, initial_y), (initial_x - 20, initial_y), (initial_x - 40, initial_y)] # positions of three segments
         self.apples = []
         self.apple_positions = []
-        self.load_asset()
-        self.create_snake()
 
    
         

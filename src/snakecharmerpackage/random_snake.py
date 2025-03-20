@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import ImageColor
+from PIL import ImageColor, ImageTk, Image
 from tkinter import ttk
 import random
 # nvm did not figure out how to get both main and tests to work (requires no ., tests requires .)
@@ -25,10 +25,30 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.master.color_settings = {"color": "yellow"}
         self.wait_for_settings()
 
+        # initialize
+        initial_x, initial_y = random.randint(100, 400), random.randint(100, 400) # spawn within center area
+        self.snake_positions = [(initial_x, initial_y), (initial_x - 20, initial_y), (initial_x - 40, initial_y)] # positions of three segments
+        self.apples = []
+        self.apple_positions = []
+        self.load_asset()
+        self.create_snake()
+
+   
+        
+        # set up game loop
+        self.direction = "right"
+        #self.bind_all("<Key>", self.move_random) # listens for any key press too annoying
+        self.bind('space>',   self.move_random) 
+        self.score = 0
+        
+        self.pack()
+
+        self.after(100, self.perform_actions)
+
     def draw(self):
         self.delete("snake")
         for x, y in self.snake_positions:
-            self.create_rectangle(x, y, x + 10, y + 10, fill=self.color, tag="snake")
+            self.create_rectangle(x, y, x + 10, y + 10, fill="yellow", tag="snake")
 
     def spawn_apples(self,num):
         for i in range(num):
@@ -47,7 +67,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
                 self.score += 10
                 return True
         return False
-    
+
     def move_snake(self):
         '''
         Defines movement for the snake.
@@ -62,7 +82,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             new_head_pos = (head_x, head_y + move_size)
         elif self.direction == "up":
             new_head_pos = (head_x, head_y - move_size)
-        
+
         if self.check_apple():
             self.snake_positions.insert(0,new_head_pos)
         else:
@@ -115,8 +135,11 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         if self.check_collisions(): 
             self.end_game()
+            return
         self.move_snake()
+
         self.after(self.game_speed, self.perform_actions) # move snake according to speed setting
+
 
     def check_collisions(self):
         ''' 
@@ -141,6 +164,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         start_button.pack(pady=10)
 
     def start_game(self):
+
         self.snake_positions = [(250, 250), (240, 250), (230, 250)]
         self.direction = "right"
         self.bind_all("<Key>", self.move_random)

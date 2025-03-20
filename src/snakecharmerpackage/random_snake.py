@@ -43,7 +43,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         Loads snake segment asset.
         '''
-        # color change is implemented here
         self.snake_img = Image.open("snake.png")
         self.snake_body = ImageTk.PhotoImage(self.snake_img)
 
@@ -105,6 +104,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         settings_window = Settings(self.master)
         self.master.wait_window(settings_window)
         self.speed(self.master.settings["speed"])
+        self.color(self.master.settings["color"])
         self.start_game()
 
     def speed(self, val):
@@ -112,7 +112,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
     #color change section
     def color(self, val):
-        self.color = ImageColor.getrgb("black")
+        self.color = ImageColor.getrgb("yellow")
     
     def perform_actions(self):
         ''' Performs game loop's actions. '''

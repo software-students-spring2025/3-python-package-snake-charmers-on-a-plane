@@ -10,6 +10,9 @@ class Settings(tk.Toplevel):
         self.settings = {
             "speed": tk.IntVar(value=50)
         }
+        self.color_settings = {
+            "color" : tk.StringVar(value = "yellow")
+        }
         # Speed
         ttk.Label(self, text="Enter speed (1-100):").pack(pady=5)
         self.speed_entry = ttk.Entry(self, textvariable=self.settings["speed"])
@@ -17,7 +20,7 @@ class Settings(tk.Toplevel):
 
         #Color
         ttk.Label(self, text="Enter a color. Incorrect colors will be randomized!").pack(pady=10)
-        self.color_entry = ttk.Entry(self)
+        self.color_entry = ttk.Entry(self, textvariable = self.color_settings["color"])
         self.color_entry.pack()
 
         # button
@@ -34,4 +37,6 @@ class Settings(tk.Toplevel):
         # this should be better
         for key in self.settings:
             self.master.settings[key] = self.settings[key].get()
+        for key in self.color_settings:
+            self.master.color_settings[key] = self.color_settings[key].get()
         self.destroy()

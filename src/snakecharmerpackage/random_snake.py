@@ -12,7 +12,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     direction that your snake heads in.
     '''
 
-    def __init__(self, master):
+    def __init__(self, master, testing=False):
         # set up Canvas (container for all objects)
         super().__init__(
             master, width=500, height=500, background="darkgreen", highlightthickness=0
@@ -22,7 +22,13 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.master = master
         self.master.settings = {"speed": 50}
         self.master.color_settings = {"color": "yellow"}
-        self.wait_for_settings()
+        self.testing = testing
+        if self.testing:
+            self.speed(self.master.settings["speed"])
+            self.color = "pink"
+            self.start_game(testing=True)
+        else:
+            self.wait_for_settings()
 
     def draw(self):
         self.delete("snake")
@@ -43,6 +49,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             new_head_pos = (head_x, head_y + move_size)
         elif self.direction == "up":
             new_head_pos = (head_x, head_y - move_size)
+
 
         # replace head with body
         self.snake_positions = [new_head_pos] + self.snake_positions[:-1]
@@ -106,12 +113,14 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         # borders of play and self-collision
         return (head_x not in range(20, 480) or head_y not in range(20,480) or (head_x, head_y) in self.snake_positions[1:])
 
-    def start_game(self):
+    def start_game(self, testing=False):
         self.snake_positions = [(250, 250), (240, 250), (230, 250)]
         self.direction = "right"
         self.bind_all("<Key>", self.move_random)
         self.pack()
         self.after(self.game_speed, self.perform_actions)
+        if not testing:
+            self.after(self.game_speed, self.perform_actions)
     
     def end_game(self):
         ''' 

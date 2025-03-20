@@ -6,19 +6,22 @@ class Settings(tk.Toplevel):
         super().__init__(master)
         self.title("Settings")
         self.geometry("300x200")
-        #  settings
+        #Settings
+
+        #Speed
         self.settings = {
             "speed": tk.IntVar(value=50)
         }
-        self.color_settings = {
-            "color" : tk.StringVar(value = "yellow")
-        }
-        # Speed
+    
         ttk.Label(self, text="Enter speed (1-100):").pack(pady=5)
         self.speed_entry = ttk.Entry(self, textvariable=self.settings["speed"])
         self.speed_entry.pack()
 
         #Color
+        self.color_settings = {
+            "color" : tk.StringVar(value = "yellow")
+        }
+
         ttk.Label(self, text="Enter a color. Incorrect colors will be randomized!").pack(pady=10)
         self.color_entry = ttk.Entry(self, textvariable = self.color_settings["color"])
         self.color_entry.pack()

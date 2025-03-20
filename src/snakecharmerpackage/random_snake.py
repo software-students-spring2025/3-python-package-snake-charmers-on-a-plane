@@ -22,6 +22,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         self.master = master
         self.master.settings = {"speed": 50}
+        self.master.color_settings = {"color": "yellow"}
         self.wait_for_settings()
 
         # initialize
@@ -56,8 +57,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     def draw(self):
         self.delete("snake")
         for x, y in self.snake_positions:
-            self.create_rectangle(x, y, x + 10, y + 10, fill="yellow", tag="snake")
-
+            self.create_rectangle(x, y, x + 10, y + 10, fill=self.color, tag="snake")
 
     def move_snake(self):
         '''
@@ -104,7 +104,15 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         settings_window = Settings(self.master)
         self.master.wait_window(settings_window)
         self.speed(self.master.settings["speed"])
-        self.color(self.master.settings["color"])
+        try: #if input is a valid color, then all clear!
+            ImageColor.getrgb(self.master.color_settings["color"])#check if valid
+            self.color = self.master.color_settings["color"]#set!
+        except: #else, randomize!
+            #sorry for how gross and long this is, but needs must
+            self.color = "#" + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255))
+            print("err: ")
+            print(self.color)
+        
         self.start_game()
 
     def speed(self, val):
@@ -112,7 +120,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
     #color change section
     def color(self, val):
-        self.color = ImageColor.getrgb("yellow")
+        self.color = "yellow"
     
     def perform_actions(self):
         ''' Performs game loop's actions. '''

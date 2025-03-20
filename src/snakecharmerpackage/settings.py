@@ -19,10 +19,6 @@ class Settings(tk.Toplevel):
         self.start_button.pack(pady=10)
 
     def apply_settings(self):
-        ''''self.master.settings = {
-            "speed": max(1, min(100, self.settings["speed"].get()))
-        }
-        self.destroy()'''
         # this should be better
         for key in self.settings:
             self.master.settings[key] = self.settings[key].get()

@@ -2,7 +2,6 @@
 ## Description
 Have you ever needed to waste more time? Have no fear, random snake is here! With our amazing package, you can play with a little snake that doesn't like listening to you, and try your best to hang out with it as long as possible.
 
-=======
 ## Package Description
 
 This package will open up a window where you can set the snake's speed and color. You can also summon an inputted amount of apples that the snake can eat, and attempt to command the snake to move around (it may or may not listen). 

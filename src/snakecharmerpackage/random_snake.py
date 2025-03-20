@@ -13,7 +13,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     direction that your snake heads in.
     '''
 
-    def __init__(self, master):
+    def __init__(self, master, testing=False):
         # set up Canvas (container for all objects)
         super().__init__(
             master, width=500, height=500, background="darkgreen", highlightthickness=0
@@ -30,8 +30,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.snake_positions = [(initial_x, initial_y), (initial_x - 20, initial_y), (initial_x - 40, initial_y)] # positions of three segments
         self.apples = []
         self.apple_positions = []
-        self.load_asset()
-        self.create_snake()
 
    
         

@@ -1,8 +1,9 @@
 import tkinter as tk
-from PIL import Image, ImageTk, ImageColor
+from PIL import ImageColor, ImageTk, Image
 from tkinter import ttk
 import random
-from src.snakecharmerpackage.settings import Settings
+# nvm did not figure out how to get both main and tests to work (requires no ., tests requires .)
+from settings import Settings
 
 move_size = 10 # pixels
 
@@ -44,20 +45,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         self.after(100, self.perform_actions)
 
-    def load_asset(self):
-        '''
-        Loads snake segment asset.
-        '''
-        self.snake_img = Image.open("snake.png")
-        self.snake_body = ImageTk.PhotoImage(self.snake_img)
-
-    def create_snake(self):
-        '''
-        Creates snake segment asset.
-        '''
-        for x, y in self.snake_positions:
-            self.create_image(x, y, image=self.snake_body, tag="snake") # tag works similarly to class in css
-
     def draw(self):
         self.delete("snake")
         for x, y in self.snake_positions:
@@ -70,6 +57,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             apple = self.create_oval(x, y, x+10, y+10, fill='red')
             self.apples.append(apple)
             self.apple_positions.append((x,y))
+
     def check_apple(self):
         head_x, head_y = self.snake_positions[0]
         for i, (apple_x, apple_y) in enumerate(self.apple_positions):
@@ -80,7 +68,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
                 return True
         return False
 
-        
     def move_snake(self):
         '''
         Defines movement for the snake.
@@ -96,17 +83,11 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         elif self.direction == "up":
             new_head_pos = (head_x, head_y - move_size)
 
-        
-
         if self.check_apple():
             self.snake_positions.insert(0,new_head_pos)
         else:
             # replace head with body
             self.snake_positions = [new_head_pos] + self.snake_positions[:-1]
-        # I don't think this loop is necessary anymore
-        '''snake_segments = self.find_withtag("snake") # list
-        for segment, pos in zip(snake_segments, self.snake_positions):
-            self.coords(segment, pos) # update positions'''
 
         self.draw()
 

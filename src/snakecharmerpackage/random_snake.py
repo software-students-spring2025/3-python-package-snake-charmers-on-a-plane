@@ -3,7 +3,7 @@ from PIL import ImageColor, ImageTk, Image
 from tkinter import ttk
 import random
 # nvm did not figure out how to get both main and tests to work (requires no ., tests requires .)
-from settings import Settings
+from src.snakecharmerpackage.settings import Settings
 
 move_size = 10 # pixels
 
@@ -13,7 +13,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     direction that your snake heads in.
     '''
 
-    def __init__(self, master, testing=False):
+    def __init__(self, master):
         # set up Canvas (container for all objects)
         super().__init__(
             master, width=500, height=500, background="darkgreen", highlightthickness=0

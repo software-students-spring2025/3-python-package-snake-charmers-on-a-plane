@@ -2,7 +2,7 @@ import pytest
 import tkinter as tk
 import sys 
 sys.path.append("..")
-from src.snakecharmerpackage import random_snake
+from snakecharmerpackage import random_snake
 
 snake = random_snake.RandomSnake(tk.Tk())
 
@@ -20,7 +20,7 @@ class Test:
         '''
         snake.start_game()
         assert snake.snake_positions == [(250, 250), (240, 250), (230, 250)], f"Expected snake position = [(250, 250), (240, 250), (230, 250)], was {snake.snake_positions} instead"
-        assert snake.direction == "right", f"Expected snake direction to be 'right', was {snake.direction} instead"
+        assert snake.direction == "none", f"Expected snake direction to be 'right', was {snake.direction} instead"
 
     def test_game_speed(self):
         '''

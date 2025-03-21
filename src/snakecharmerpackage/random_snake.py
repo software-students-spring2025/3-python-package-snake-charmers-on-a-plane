@@ -170,12 +170,18 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.apple_window()
         self.pack()
         self.after(self.game_speed, self.perform_actions)
-    
+
     def end_game(self):
-        ''' 
-        Defines the end of the game. 
-        '''
-        self.delete(self.find_withtag("snake")) # not working, snake is still there at end of game
-        self.delete(tk.ALL)
-        self.create_text(250, 250, text="Game over!\nMay the RNG gods bestow\nfavor upon you next time.", fill="white", font=("", 20))
+        '''Ends the game and displays the Game Over screen.'''
+        self.delete(self.find_withtag("snake"))  # Remove the snake
+        self.delete(tk.ALL)  # Clear canvas
+        self.create_text(
+            250, 250,
+            text="Game over!\nMay the RNG gods bestow\nfavor upon you next time.",
+            fill="white",
+            font=("", 20),
+            tag="game_over")
+        self.after_cancel(self.perform_actions)
+
+
 

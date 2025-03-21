@@ -1,4 +1,7 @@
 # Python Package Exercise
+=======
+![tests](https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane/actions/workflows/build.yaml/badge.svg)
+
 Have you ever needed to waste more time? Have no fear, random snake is here! With our amazing package, you can play with a little snake that doesn't like listening to you, and try your best to hang out with it as long as possible.
 
 =======

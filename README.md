@@ -9,7 +9,7 @@ This package will open up a window where you can set the snake's speed and color
 TODO: badge
 
 ## PyPI link
-TODO: a link to your package's page on the PyPI website.
+https://pypi.org/project/snakecharmers/0.1.1/
 
 ## Instructions for Code Import
 TODO: how a developer who wants to import your project into their own code can do so - include documentation and code examples for all functions in your package and a link to an example Python program that uses each of them.
@@ -20,7 +20,7 @@ TODO: how a developer who wants to contribute to your project can set up the vir
 ## Team Members
 Samantha Lin: https://github.com/sal2948
 
-Kurt Luko: https://github.com/kl3641
+Kurt Lukowitsch: https://github.com/kl3641
 
 Eli Sun: https://github.com/IDislikeName
 
@@ -37,13 +37,12 @@ pip install pipenv
 ```
 pipenv shell
 ```
-3. Install randomsnake
+3. Install snakecharmers
 ```
-pipenv install randomsnake
+pipenv install snakecharmers
 ```
-
 4. Navigate to the package directory, then run this command:
 ```
-TODO: command to run our package from the command line
+PYTHONPATH=src python -m snakecharmerpackage
 ```
 5. Have fun with your belligerent snake!

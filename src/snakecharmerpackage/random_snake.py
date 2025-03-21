@@ -3,7 +3,7 @@ from PIL import ImageColor, ImageTk, Image
 from tkinter import ttk
 import random
 # nvm did not figure out how to get both main and tests to work (requires no ., tests requires .)
-from src.snakecharmerpackage.settings import Settings
+from .settings import Settings
 
 move_size = 10 # pixels
 
@@ -18,6 +18,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         super().__init__(
             master, width=500, height=500, background="darkgreen", highlightthickness=0
         )
+        # is defining this necessary?
         mainframe = ttk.Frame(self, padding="3 3 12 12")
 
         self.master = master
@@ -46,7 +47,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     def draw(self):
         self.delete("snake")
         for x, y in self.snake_positions:
-            self.create_rectangle(x, y, x + 10, y + 10, fill="yellow", tag="snake")
+            self.create_rectangle(x, y, x + 10, y + 10, fill=self.color, tag="snake")
 
     def spawn_apples(self,num):
         for i in range(num):
@@ -124,6 +125,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.game_speed = int((1000 / val) * 10)
 
     #color change section
+    # What does this method actually do? Removing it doesn't break anything
     def color(self, val):
         self.color = "yellow"
     
@@ -173,7 +175,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
     def end_game(self):
         '''Ends the game and displays the Game Over screen.'''
-        self.delete(self.find_withtag("snake"))  # Remove the snake
+        self.delete(self.find_withtag("snake"))
         self.delete(tk.ALL)  # Clear canvas
         self.create_text(
             250, 250,

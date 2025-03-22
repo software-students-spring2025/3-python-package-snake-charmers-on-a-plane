@@ -40,10 +40,14 @@ Link to example python program:
 
 ## Instructions for Contribution to snakecharmers
 1. To contribute to the project, first clone our repository:
-```git clone https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane.git```
+```
+git clone https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane.git
+```
 
 2. Navigate to the repository:
-```cd 3-python-package-snake-charmers-on-a-plane```
+```
+cd 3-python-package-snake-charmers-on-a-plane
+```
 
 3. Install pipenv, pytest, and create a virtual environment:
 ```
@@ -52,7 +56,9 @@ pipenv install pytest
 ```
 
 4. Activate the virtual environment:
-```pipenv shell```
+```
+pipenv shell
+```
 
 5. Make your contributions!
 

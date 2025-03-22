@@ -17,27 +17,10 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         super().__init__(
             master, width=500, height=500, background="darkgreen", highlightthickness=0
         )
-        # is defining this necessary?
-        mainframe = ttk.Frame(self, padding="3 3 12 12")
-
         self.master = master
         self.master.settings = {"speed": 50}
         self.master.color_settings = {"color": "yellow"}
         self.wait_for_settings()
-
-        # initialize
-        initial_x, initial_y = random.randint(100, 400), random.randint(100, 400) # spawn within center area
-        self.snake_positions = [(initial_x, initial_y), (initial_x - 20, initial_y), (initial_x - 40, initial_y)] # positions of three segments
-        self.apples = []
-        self.apple_positions = []
-
-   
-        
-        # set up game loop
-        self.direction = "right"
-        #self.bind_all("<Key>", self.move_random) # listens for any key press too annoying
-        self.bind('space>',   self.move_random) 
-        self.score = 0
         
         self.pack()
 
@@ -81,7 +64,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         if self.direction == "none":
             self.draw()
-            return # still sometimes doesn't work, especially if apple number = 2
+            return 
 
         if self.direction == "left":
             new_head_pos = (head_x - move_size, head_y)
@@ -106,6 +89,8 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         '''
         all_directions = ["up", "down", "left", "right"]
         opposites = ({"up", "down"}, {"left", "right"})
+
+        print("Current snake direction:", self.direction)
 
         if self.direction != "none":
             all_directions.remove(self.direction)
@@ -142,7 +127,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.game_speed = int((1000 / val) * 10)
 
     #color change section
-    # What does this method actually do? Removing it doesn't break anything
     def color(self, val):
         self.color = "yellow"
     
@@ -185,7 +169,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
         self.snake_positions = [(250, 250), (240, 250), (230, 250)]
         self.direction = "none"  # so the snake doesn't move until the player presses space
-        self.bind_all("<space>", self.move_random) # updated to space to match prev commit
+        self.bind_all("<space>", self.move_random)
         self.apples = []
         self.apple_positions = []
         self.score = 0
@@ -203,19 +187,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
     def end_game(self):
         '''Ends the game and displays the Game Over screen.'''
         self.delete(self.find_withtag("snake"))
-        self.delete(tk.ALL)  # Clear canvas
-        self.create_text(
-            250, 250,
-            text="Game over!\nMay the RNG gods bestow\nfavor upon you next time.",
-            fill="white",
-            font=("", 20),
-            tag="game_over")
-        self.after_cancel(self.perform_actions)
-
-
-    def end_game(self):
-        '''Ends the game and displays the Game Over screen.'''
-        self.delete(self.find_withtag("snake"))  # Remove the snake
         self.delete(tk.ALL)  # Clear canvas
         self.create_text(
             250, 250,

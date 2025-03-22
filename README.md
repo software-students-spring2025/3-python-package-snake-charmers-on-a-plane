@@ -1,21 +1,76 @@
-# Python Package Exercise
-=======
+
 ![tests](https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane/actions/workflows/build.yaml/badge.svg)
 
-Have you ever needed to waste more time? Have no fear, random snake is here! With our amazing package, you can play with a little snake that doesn't like listening to you, and try your best to hang out with it as long as possible.
+# Python Package Exercise
 
-=======
-## Package Description
+## Description
+Have you ever needed to waste more time? Have no fear, random snake is here! With our amazing package, you can play with a little snake that doesn't like listening to you, and try your best to hang out with it as long as possible.
 
 This package will open up a window where you can set the snake's speed and color. You can also summon an inputted amount of apples that the snake can eat, and attempt to command the snake to move around (it may or may not listen). 
 
-TODO: badge
+## PyPI link
+https://pypi.org/project/snakecharmers/0.1.1/
 
-TODO: a link to your package's page on the PyPI website.
+## Function documentation and examples
+### move_random(space_key)
+This function performs the random movement of the snake for any press of the user's space key, and ensures that you'll be at least mildly frustrated while playing the game. 
 
-TODO: how a developer who wants to import your project into their own code can do so - include documentation and code examples for all functions in your package and a link to an example Python program that uses each of them.
+- Input: space key pressed
+- Output: none
 
-TODO: how a developer who wants to contribute to your project can set up the virtual environment, install dependencies, and build and test your package for themselves.
+### spawn_apples(apple_num)
+This function spawns a user-chosen number of apples. Once all apples have been eaten, or if the snake hits the window boundary, the game is over. 
+
+- Input: any positive number
+- Output: none
+
+### speed(speed_number)
+This function configures the speed of the snake, from 0 - 100. The user inputs their desired speed before the game starts.
+
+- Input: number from 0 - 100, inclusive
+- Output: none
+
+### color(color_name)
+This function configures the color of the snake. If the user does not input a valid color name at the start of the game, the snake's color is randomly picked. 
+
+- Input: name of color (ex. red, lightblue, purple)
+- Output: none
+
+Link to example python program: 
+
+## Instructions for Contribution to snakecharmers
+1. To contribute to the project, first clone our repository:
+```git clone https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane.git```
+
+2. Navigate to the repository:
+```cd 3-python-package-snake-charmers-on-a-plane```
+
+3. Install pipenv, pytest, and create a virtual environment:
+```
+pip install pipenv
+pipenv install pytest
+```
+
+4. Activate the virtual environment:
+```pipenv shell```
+
+5. Make your contributions!
+
+6. After removing any ```*.egg-info``` and ```dist```  directories, upload your contributions to PyPI with:
+```
+pip install build twine
+python -m build
+twine upload dist/*
+```
+
+## Team Members
+Samantha Lin: https://github.com/sal2948
+
+Kurt Lukowitsch: https://github.com/kl3641
+
+Eli Sun: https://github.com/IDislikeName
+
+Ray Ochotta: https://github.com/SnowyOchole
 
 ## Installation and setup
 
@@ -28,25 +83,12 @@ pip install pipenv
 ```
 pipenv shell
 ```
-3. Install randomsnake
+3. Install snakecharmers
 ```
-pipenv install randomsnake
+pipenv install snakecharmers
 ```
-
 4. Navigate to the package directory, then run this command:
 ```
-TODO: command to run our package from the command line
+PYTHONPATH=src python -m snakecharmerpackage
 ```
 5. Have fun with your belligerent snake!
-
-
-
-GitHub authors:
-    Samantha Lin: @sal2948
-    Kurt Luko: @kl3641
-    Eli Sun: @IDislikeName
-    Ray Ochotta: @SnowyOchole
-
-TODO: instructions for how to configure and run all parts of your project for any developer on any platform - these instructions must work!
-
-TODO: instructions for how to set up any environment variables and import any starter data into the database, as necessary, for the system to operate correctly when run.

@@ -5,7 +5,7 @@ class Settings(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Settings")
-        self.geometry("400x200")
+        self.geometry("250x200")
         #Settings
 
         #Speed
@@ -22,7 +22,7 @@ class Settings(tk.Toplevel):
             "color" : tk.StringVar(value = "yellow")
         }
 
-        ttk.Label(self, text="Enter a color. Incorrect colors will be randomized!").pack(pady=10)
+        ttk.Label(self, text="Enter a color. Invalid colors will be randomized!").pack(pady=10)
         self.color_entry = ttk.Entry(self, textvariable = self.color_settings["color"])
         self.color_entry.pack()
 

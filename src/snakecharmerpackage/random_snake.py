@@ -20,9 +20,22 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.master = master
         self.master.settings = {"speed": 50}
         self.master.color_settings = {"color": "yellow"}
-        self.wait_for_settings()
-        
+
+        # moved some things from start game to init
+        self.snake_positions = [(250, 250), (240, 250), (230, 250)]
+        self.direction = "none"  # so the snake doesn't move until the player presses space
+        self.bind_all("<space>", self.move_random)
+        self.apples = []
+        self.apple_positions = []
+        self.score = 0
+        self.color = self.color
+        self.speed_num = 50
+
         self.pack()
+
+        settings_window = Settings(self.master)
+        self.master.wait_window(settings_window)
+        self.wait_for_settings()
 
         self.after(100, self.perform_actions)
 
@@ -111,25 +124,26 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             self.direction = random_direction
 
     def wait_for_settings(self):
-        settings_window = Settings(self.master)
-        self.master.wait_window(settings_window)
         self.speed(self.master.settings["speed"])
+        self.speed_num = self.master.settings["speed"]
         try: #if input is a valid color, then all clear!
             ImageColor.getrgb(self.master.color_settings["color"])#check if valid
             self.color = self.master.color_settings["color"]#set!
         except: #else, randomize!
             #sorry for how gross and long this is, but needs must
             self.color = "#" + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255)) + '{:02x}'.format(random.randint(0, 255))
-        
+            self.master.color_settings["color"] = self.color # added
+
         self.start_game()
 
     def speed(self, val):
         self.game_speed = int((1000 / val) * 10)
 
     #color change section
+    # required
     def color(self, val):
         self.color = "yellow"
-    
+
     def perform_actions(self):
         ''' 
         Performs game loop's actions. 
@@ -159,7 +173,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         # Speed
         ttk.Label(self.new_window, text="Enter apples to spawn (1-10):").pack(pady=5)
         apple_entry = ttk.Entry(self.new_window, textvariable=self.n)
-        #self.apple_num = int(self.n.get()) # for tracking score
         apple_entry.pack()
         # button
         start_button = tk.Button(self.new_window, text="Spawn", command=lambda: self.spawn_apples(int(self.n.get())), bg="lightgray", fg="black")
@@ -167,13 +180,6 @@ class RandomSnake(tk.Canvas): # self is Canvas object
 
     def start_game(self):
 
-        self.snake_positions = [(250, 250), (240, 250), (230, 250)]
-        self.direction = "none"  # so the snake doesn't move until the player presses space
-        self.bind_all("<space>", self.move_random)
-        self.apples = []
-        self.apple_positions = []
-        self.score = 0
-        self.color = self.color
         self.apple_window()
         self.create_text(35, 12, text=f"Score: {self.score}", tag="score", fill="white", font=(10))
         self.create_text(

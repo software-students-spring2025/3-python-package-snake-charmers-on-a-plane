@@ -21,7 +21,7 @@ This function performs the random movement of the snake for any press of the use
 ### spawn_apples(apple_num)
 This function spawns a user-chosen number of apples. Once all apples have been eaten, or if the snake hits the window boundary, the game is over. 
 
-- Input: any positive number
+- Input: number from 1 - 10
 - Output: none
 
 ### speed(speed_number)
@@ -33,17 +33,23 @@ This function configures the speed of the snake, from 0 - 100. The user inputs t
 ### color(color_name)
 This function configures the color of the snake. If the user does not input a valid color name at the start of the game, the snake's color is randomly picked. 
 
-- Input: name of color (ex. red, lightblue, purple)
+- Input: name of color (ex. red, lightblue, purple, any_string)
 - Output: none
 
-Link to example python program: 
+### Demonstration of usage
+
+[Link to Example File](https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane/example.md)
 
 ## Instructions for Contribution to snakecharmers
 1. To contribute to the project, first clone our repository:
-```git clone https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane.git```
+```
+git clone https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane.git
+```
 
 2. Navigate to the repository:
-```cd 3-python-package-snake-charmers-on-a-plane```
+```
+cd 3-python-package-snake-charmers-on-a-plane
+```
 
 3. Install pipenv, pytest, and create a virtual environment:
 ```
@@ -52,7 +58,9 @@ pipenv install pytest
 ```
 
 4. Activate the virtual environment:
-```pipenv shell```
+```
+pipenv shell
+```
 
 5. Make your contributions!
 

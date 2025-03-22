@@ -30,6 +30,7 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.score = 0
         self.color = self.color
         self.speed_num = 50
+        
 
         self.pack()
 

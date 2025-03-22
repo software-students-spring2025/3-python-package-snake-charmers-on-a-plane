@@ -3,12 +3,6 @@ from PIL import ImageColor
 from tkinter import ttk
 import random
 from snakecharmerpackage.settings import Settings
-import sys
-import os
-
-if os.environ.get('DISPLAY','') == '':
-    print('no display found. Using :0.0')
-    os.environ.__setitem__('DISPLAY', ':0.0')
 
 move_size = 10 # pixels
 

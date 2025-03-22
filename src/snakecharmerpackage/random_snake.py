@@ -111,8 +111,9 @@ class RandomSnake(tk.Canvas): # self is Canvas object
             self.direction = random_direction
 
     def wait_for_settings(self):
-        settings_window = Settings(self.master)
-        self.master.wait_window(settings_window)
+        #settings_window = Settings(self.master)
+        #self.master.wait_window(settings_window)
+        
         self.speed(self.master.settings["speed"])
         try: #if input is a valid color, then all clear!
             ImageColor.getrgb(self.master.color_settings["color"])#check if valid

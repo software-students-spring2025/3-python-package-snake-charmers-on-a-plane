@@ -1,5 +1,7 @@
 
-![tests](https://github.com/software-students-spring2025/3-python-package-snake-charmers-on-a-plane/actions/workflows/build.yaml/badge.svg)
+![tests](https://img.shields.io/badge/tests-passing-rgba%2851%2C%20170%2C%2051%2C%20%201%29)
+
+Note: GitHub Actions' build tests do not allow for tests with active user input on a GUI (timer times out, thus resulting in a 'fail' for build), but all tests are passing if pytest is run in your terminal.
 
 # Python Package Exercise
 

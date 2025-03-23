@@ -32,11 +32,11 @@ class RandomSnake(tk.Canvas): # self is Canvas object
         self.speed_num = 50
 
 
-        self.pack()
-
-        settings_window = Settings(self.master)
-        self.master.wait_window(settings_window)
+        self.settings_window = Settings(self.master)
+        self.master.wait_window(self.settings_window)
         self.wait_for_settings()
+
+        self.pack()
 
         self.after(100, self.perform_actions)
 
